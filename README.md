@@ -21,7 +21,8 @@
 
 ## 背景
 
-> sprite中文翻译为精灵，希望可以如精灵般美好~
+> cuddly：some examples
+
 
 ## 模块介绍
 
