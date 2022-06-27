@@ -1,0 +1,116 @@
+import java.nio.charset.StandardCharsets
+
+plugins {
+    id "com.github.hierynomus.license" version "0.16.1" apply(false)
+    id "io.freefair.lombok" version "6.4.1" apply(false)
+    id 'io.spring.dependency-management' version "1.0.11.RELEASE" apply(false)
+    id "me.champeau.jmh" version "0.6.6" apply false
+    id "com.github.ben-manes.versions" version '0.39.0'
+}
+
+allprojects { project ->
+    group "${GROUP}"
+    version "${VERSION}"
+
+    // 定义maven仓库地址
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        mavenCentral()
+        mavenLocal()
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            // 配置缓存实时更新
+            cacheChangingModulesFor 0, "seconds"
+            cacheDynamicVersionsFor 0, "seconds"
+            force libs.fastjson
+        }
+    }
+}
+
+subprojects { project ->
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'idea'
+    apply plugin: 'jacoco'
+    apply plugin: 'com.github.hierynomus.license'
+    apply plugin: 'io.freefair.lombok'
+    apply plugin: 'checkstyle'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'me.champeau.jmh'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    // 源码编译任务
+    task sourcesJar(type: Jar) {
+        archiveClassifier.set("sources")
+        from sourceSets.main.allSource
+    }
+
+    tasks.withType(Javadoc) {
+        options.encoding = StandardCharsets.UTF_8.name()
+        destinationDir = file("$buildDir/docs/javadoc")
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = StandardCharsets.UTF_8.name()
+    }
+
+    // 打包自定义设置
+    jar {
+        into("META-INF/") {
+            from rootProject.file("LICENSE")
+        }
+    }
+
+    javadoc {
+        afterEvaluate {
+            configure(options) {
+                charSet StandardCharsets.UTF_8.name()
+                author true
+                version true
+                failOnError false
+                links "https://docs.oracle.com/javase/8/docs/api"
+            }
+        }
+    }
+
+    license {
+        encoding = StandardCharsets.UTF_8.name()
+        header = rootProject.file("source_code_head.txt")
+        includes(["**/*.java"])
+        exclude "**/test/java/**/*.java"
+        exclude "**/*Test.java"
+        mapping "java", "SLASHSTAR_STYLE"
+        ext.year = Calendar.getInstance().get(Calendar.YEAR)
+    }
+
+    checkstyle {
+        toolVersion = '9.3'
+        configFile = file("${rootProject.projectDir}/code_checks.xml")
+    }
+    //解决因为使用内部API导致的编译错误
+    compileJava {
+        inputs.files(processResources)
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${SPRING_BOOT_VERSION}"
+        }
+    }
+
+    // 通用依赖
+    dependencies {
+        implementation libs.logback
+        implementation libs.bundles.jmh
+        testImplementation libs.junitJupiterApi
+        testRuntimeOnly libs.junitJupiterEngine
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}

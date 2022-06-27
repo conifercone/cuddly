@@ -1,0 +1,32 @@
+[versions]
+junitVersion = "5.7.2"
+logbackVersion = "1.2.10"
+jacksonVersion = "2.13.2.2"
+jmhVersion = "1.32"
+fastjsonVersion = "1.2.83"
+nanoidVersion = "2.0.0"
+hutoolVersion = "5.7.22"
+springVersion = '5.3.15'
+mysqlVersion = "8.0.27"
+groovyVersion = '2.4.8'
+
+
+[libraries]
+junitJupiterApi = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junitVersion" }
+junitJupiterEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junitVersion" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logbackVersion" }
+jmhCore = { module = "org.openjdk.jmh:jmh-core", version.ref = "jmhVersion" }
+jmhGeneratorAnnprocess = { module = "org.openjdk.jmh:jmh-generator-annprocess", version.ref = "jmhVersion" }
+fastjson = { module = "com.alibaba:fastjson", version.ref = "fastjsonVersion" }
+jackson = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jacksonVersion" }
+springBootAutoConfigure = { module = "org.springframework.boot:spring-boot-autoconfigure" }
+springBootConfigurationProcessor = { module = "org.springframework.boot:spring-boot-configuration-processor" }
+springBootStarterTest = { module = "org.springframework.boot:spring-boot-starter-test" }
+nanoid = { module = "com.aventrix.jnanoid:jnanoid", version.ref = "nanoidVersion" }
+hutool = { module = "cn.hutool:hutool-all", version.ref = "hutoolVersion" }
+mysql = { module = "mysql:mysql-connector-java", version.ref = "mysqlVersion" }
+springBootTest = { module = "org.springframework.boot:spring-boot-starter-test" }
+groovy = { module = "org.codehaus.groovy:groovy-all", version.ref = "groovyVersion" }
+
+[bundles]
+jmh = ["jmhCore", "jmhGeneratorAnnprocess"]
