@@ -9,7 +9,16 @@ hutoolVersion = "5.7.22"
 springVersion = '5.3.15'
 mysqlVersion = "8.0.27"
 groovyVersion = '2.4.8'
-
+bcpkixJdk15onVersion = '1.64'
+bcprovJdk15onVersion = '1.64'
+bcmailJdk15Version = '1.46'
+itextAsianVersion = '5.2.0'
+itextpdfVersion = '5.5.11'
+itextXtraVersion = '5.5.13'
+itextPdfaVersion = '5.5.13'
+xmlworkerVersion = '5.5.13'
+jfreechartVersion = '1.0.19'
+commonsImagingVersion = '1.0-alpha2'
 
 [libraries]
 junitJupiterApi = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junitVersion" }
@@ -27,6 +36,16 @@ hutool = { module = "cn.hutool:hutool-all", version.ref = "hutoolVersion" }
 mysql = { module = "mysql:mysql-connector-java", version.ref = "mysqlVersion" }
 springBootTest = { module = "org.springframework.boot:spring-boot-starter-test" }
 groovy = { module = "org.codehaus.groovy:groovy-all", version.ref = "groovyVersion" }
+bcpkixJdk15on = { module = "org.bouncycastle:bcpkix-jdk15on", version.ref = "bcpkixJdk15onVersion" }
+bcprovJdk15on = { module = "org.bouncycastle:bcprov-jdk15on", version.ref = "bcprovJdk15onVersion" }
+bcmailJdk15 = { module = "org.bouncycastle:bcmail-jdk15", version.ref = "bcmailJdk15Version" }
+itextAsian = { module = "com.itextpdf:itext-asian", version.ref = "itextAsianVersion" }
+itextpdf = { module = "com.itextpdf:itextpdf", version.ref = "itextpdfVersion" }
+itextXtra = { module = "com.itextpdf:itext-xtra", version.ref = "itextXtraVersion" }
+itextPdfa = { module = "com.itextpdf:itext-pdfa", version.ref = "itextPdfaVersion" }
+xmlworker = { module = "com.itextpdf.tool:xmlworker", version.ref = "xmlworkerVersion" }
+jfreechart = { module = "org.jfree:jfreechart", version.ref = "jfreechartVersion" }
+commonsImaging = { module = "org.apache.commons:commons-imaging", version.ref = "commonsImagingVersion" }
 
 [bundles]
 jmh = ["jmhCore", "jmhGeneratorAnnprocess"]

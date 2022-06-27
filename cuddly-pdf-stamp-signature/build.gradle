@@ -1,2 +1,12 @@
 dependencies {
+    implementation libs.bcpkixJdk15on
+    implementation libs.bcprovJdk15on
+    implementation libs.bcmailJdk15
+    implementation libs.itextAsian
+    implementation libs.itextpdf
+    implementation libs.itextXtra
+    implementation libs.itextPdfa
+    implementation libs.xmlworker
+    implementation libs.jfreechart
+    implementation libs.commonsImaging
 }
