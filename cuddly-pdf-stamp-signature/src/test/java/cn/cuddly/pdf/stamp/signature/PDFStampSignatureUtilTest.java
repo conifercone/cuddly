@@ -19,11 +19,11 @@ class PDFStampSignatureUtilTest {
 
   @Test
   void sign() throws IOException, GeneralSecurityException, DocumentException {
-    String KEYSTORE = "E:\\iotest\\itextpdf\\test2.p12";
-    char[] PASSWORD = "123456".toCharArray();//keystory密码
-    String SRC = "E:\\iotest\\itextpdf\\javase.pdf";//原始pdf
-    String DEST = "E:\\iotest\\itextpdf\\signjavase.pdf";//签名完成的pdf
-    String chapterPath = "E:\\iotest\\itextpdf\\stamp.png";//签章图片
+    String KEYSTORE = "C:\\Users\\sky\\Downloads\\Documents\\qszl\\test_rsa_0526.pfx";
+    char[] PASSWORD = "11111111".toCharArray();//keystory密码
+    String SRC = "C:\\Users\\sky\\Downloads\\Documents\\qszl\\111.pdf";//原始pdf
+    String DEST = "C:\\Users\\sky\\Downloads\\Documents\\qszl\\222.pdf";//签名完成的pdf
+    String chapterPath = "C:\\Users\\sky\\Downloads\\Documents\\qszl\\stamp.png";//签章图片
     String reason = "数据不可更改";
     String location = "beijing";
     PDFStampSignatureUtil.sign(new FileInputStream(KEYSTORE), PASSWORD, new FileInputStream(SRC),
@@ -32,7 +32,7 @@ class PDFStampSignatureUtilTest {
 
   @Test
   void verifySignature() throws Exception {
-    String SRC = "E:\\iotest\\itextpdf\\javase.pdf";//原始pdf
+    String SRC = "C:\\Users\\sky\\Downloads\\Documents\\qszl\\222.pdf";//原始pdf
     Assertions.assertTrue(PDFStampSignatureUtil.verifySignature(new FileInputStream(SRC)));
   }
 }

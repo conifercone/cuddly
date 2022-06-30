@@ -19,8 +19,10 @@ import java.lang.reflect.Field;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.PrivateKey;
+import java.security.Security;
 import java.security.cert.Certificate;
 import java.util.List;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /**
  * PDF签名盖章工具类
@@ -87,7 +89,9 @@ public class PDFStampSignatureUtil {
   }
 
   public static boolean verifySignature(InputStream resource) throws Exception {
-
+    BouncyCastleProvider bcp = new BouncyCastleProvider();
+    //Security.addProvider(bcp);
+    Security.insertProviderAt(bcp, 1);
     Field rsaDataField = PdfPKCS7.class.getDeclaredField("RSAdata");
     rsaDataField.setAccessible(true);
 
