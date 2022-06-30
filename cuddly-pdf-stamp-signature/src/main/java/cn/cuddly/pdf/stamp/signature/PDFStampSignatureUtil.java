@@ -8,6 +8,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfSignatureAppearance;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.security.BouncyCastleDigest;
+import com.itextpdf.text.pdf.security.CertificateInfo;
 import com.itextpdf.text.pdf.security.DigestAlgorithms;
 import com.itextpdf.text.pdf.security.MakeSignature;
 import com.itextpdf.text.pdf.security.PdfPKCS7;
@@ -104,7 +105,10 @@ public class PDFStampSignatureUtil {
       return false;
     }
     for (String name : names) {
+      System.out.println("Signature name: " + name);
+      System.out.println("Signature covers whole document: " + acroFields.signatureCoversWholeDocument(name));
       PdfPKCS7 pk = acroFields.verifySignature(name);
+      System.out.println("Subject: " + CertificateInfo.getSubjectFields(pk.getSigningCertificate()));
 
       Object rsaDataFieldContent = rsaDataField.get(pk);
       if (rsaDataFieldContent != null && ((byte[]) rsaDataFieldContent).length == 0) {
