@@ -22,6 +22,7 @@ import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Security;
 import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 import java.util.List;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -108,6 +109,8 @@ public class PDFStampSignatureUtil {
       System.out.println("Signature name: " + name);
       System.out.println("Signature covers whole document: " + acroFields.signatureCoversWholeDocument(name));
       PdfPKCS7 pk = acroFields.verifySignature(name);
+      X509Certificate certificate = pk.getSigningCertificate();
+
       System.out.println("Subject: " + CertificateInfo.getSubjectFields(pk.getSigningCertificate()));
 
       Object rsaDataFieldContent = rsaDataField.get(pk);
